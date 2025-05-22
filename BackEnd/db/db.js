@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 const connection = mysql.createPool({
     host:'localhost',
@@ -7,6 +7,13 @@ const connection = mysql.createPool({
     database:'node_e_commerce'
 })
 
+connection.getConnection((err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        return null
+    }
+})
 
 
 module.exports = connection;

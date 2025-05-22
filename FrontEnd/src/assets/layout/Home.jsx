@@ -1,13 +1,7 @@
-import { useState } from 'react';
-
-
-
 function Home() {
- 
-
   return (
     <>
-    <p>Hello </p>
+        <p>Hello </p>
     </>
   );
 }

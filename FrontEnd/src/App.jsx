@@ -2,8 +2,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './assets/pages/Login';
 import Register from './assets/pages/Register';
-import Home from './assets/layout/Home';
+import Home from './assets/pages/Home';
 import Header from './assets/layout/Header';
+import "./assets/styles/global.css"
 function App() {
  
 

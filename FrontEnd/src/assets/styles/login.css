@@ -1,3 +1,6 @@
+
+
+
 .container {
     height: 100vh;
     display: flex;
@@ -6,25 +9,43 @@
     position: relative;
     width: 80%;
     margin: auto;
+
     .container-global {
-        width:60%;
+        width: 60%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: aqua;
         height: 35%;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+
         .container-form {
             background-color: red;
             width: 70%;
             padding: 20px;
             height: 100%;
-            position: relative;
+            position: absolute;
+            
+
+            
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                width: 80px;
+                height: 80px;
+                background-color: red;
+                border-radius: 50%;
+                opacity: 1;
+                transition: opacity 0.3s ease;
+            }
+
             h2 {
                 text-align: center;
             }
 
             form {
-
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
@@ -40,85 +61,140 @@
                         width: 80%;
                         border: none;
                         border-radius: 20px;
-                        padding: 10px
+                        padding: 10px;
                     }
-
                 }
 
                 button {
                     width: 50%;
                     border: none;
                     border-radius: 20px;
-                    padding: 10px
+                    padding: 10px;
                 }
-
             }
         }
 
         .container-button {
             background-color: blue;
-            width:30%;
-            position: relative;
+            width: 30%;
+            position: absolute;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          
+          
+
+            .siwtch {
+                z-index: 1;
+            }
+
+            
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                width: 75px;
+                height: 75px;
+                background-color: blue;
+                border-radius: 50%;
+                opacity: 1;
+                transition: opacity 0.3s ease;
+                
+            }
+
+           
         }
     }
-
 }
+
+/* ANIMATIONS */
 
 @keyframes movingL {
-    0%{
-        left:0;
-        opacity: 0;
-        
-
-    }100%{
-       left:30%;
-       opacity:1;
-       
-    }
+    0% { left: 0;  }
+    100% { left: 30%; opacity: 1; }
 }
+
 @keyframes movingR {
-    0%{
-        right:0;
-
-    }100%{
-       right:70%
-    }
+    0% { right: 0; }
+    100% { right: 70%; opacity: 1;}
 }
+
 @keyframes movingLR {
-     0%{
-        right:70%;
-        opacity: 0;
-
-    }100%{
-        right:0;
-        opacity:1;
-    }
+    0% { right: 70%; }
+    100% { right: 0; opacity: 1; }
 }
+
 @keyframes movingRR {
-   0%{
-        left:30%;
-        opacity: 0;
-    }100%{
-       left:0%;
-       opacity:1;
-       
+    0% { left: 30%;  }
+    100% { left: 0%; opacity: 1; }
+}
+
+/* LOGIN MODE */
+.login .container-global .container-form {
+    animation: movingL 0.8s linear forwards;
+    &::before,
+    &::after {
+        opacity: 0; 
+        
+    }
+  
+}
+
+.login .container-global .container-button {
+    animation: movingR 0.8s linear forwards;
+ 
+    &::before,
+    &::after {
+        opacity: 1; 
+        animation: 1.8s see ease-in-out;
+    }
+     &::before {
+                bottom: 0px;
+                right: -30px;
+            }
+
+            &::after {
+                top: 75px;
+                right: -30px;
+            }
+}
+
+/* REGISTER MODE */
+.register .container-global .container-form {
+    animation: movingRR 0.8s linear forwards;
+    z-index:1;
+    &::before,
+    &::after {
+        opacity: 1; 
+        animation: 1.8s see ease-in-out;
+    }
+     &::before {
+                bottom: 0px;
+                right: -30px;
+            }
+
+            &::after {
+                top: 75px;
+                right: -30px;
+            }
+}
+
+.register .container-global .container-button {
+    animation: movingLR 0.8s linear forwards;
+    z-index: 0;
+    &::before,
+    &::after {
+        opacity: 0; 
+      
     }
 }
 
-.login .container-global .container-form{
-   
-    animation: movingL 0.8s linear forwards;
-}
-.login .container-global .container-button{
-    
-    animation: movingR 0.8s linear forwards;
-}
-.register .container-global .container-form{
-   
-    animation: movingRR 0.8s linear forwards;
-}
-.register .container-global .container-button{
-    
-    animation: movingLR 0.8s linear forwards;
+@keyframes see {
+    0%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
+    }
 }

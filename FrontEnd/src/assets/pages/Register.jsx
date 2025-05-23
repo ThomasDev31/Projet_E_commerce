@@ -31,6 +31,7 @@ function Login() {
     return (
         <div className="container register">
             <div className="container-global">
+                <div className="decorations"></div>
                 <div className="container-form">
                     <h2>Inscription</h2>
                     <form onSubmit={handleSubmit}>
@@ -62,8 +63,8 @@ function Login() {
                 <div className="container-button">
                     <p>{message}</p>
 
-                    <Link to="/login">
-                        <button className="siwtch">
+                    <Link to="/login" className="siwtch">
+                        <button >
                             Passer à la connexion
                         </button>
                     </Link>

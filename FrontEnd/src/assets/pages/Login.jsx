@@ -32,6 +32,7 @@ function Login() {
     return (
         <div className="container login">
             <div className="container-global">
+                 <div className="decorations"></div>
                  <div className="container-form">
                 <h2>Connexion</h2>
                 <form onSubmit={handleSubmit}>

@@ -1,11 +1,46 @@
-.container_Nav {
+.container_Header{
+  position: fixed;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  top: 0;
+  z-index: 100;
+	background-color: var(--persian-green);
+  padding: 2rem 0 2rem 0;
+  height: 15%;
+}
+
+.container_Nav_01 {
+	display: grid;
+	grid-template-columns: 10% 50% 15% 15% 15%;
+	place-items: center;
+	padding: 1em 2em;
+	height: auto;
+  width: 100%;
+}
+
+.search_Section{
+  width: 100%;
+}
+
+.container_Nav_02{
+  position: absolute;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	place-items: center;
-	background-color: red;
 	padding: 1em 2em;
-	height: 50px;
+  bottom: -35%;
+  left: 50%;
+  height: 50px;
+  width: 80%;
+  background-color: red;
+  transform: translate(-50%,-50%);
 }
+
+
 
 .nav_section {
 	color: black;

@@ -1,0 +1,11 @@
+:root {
+	--charcoal: #264653;
+	--persian-green: #2a9d8f;
+	--honey-yellow: #e9c46a;
+	--sandy-orange: #f4a261;
+	--burnt-orange: #e76f51;
+}
+
+* {
+	box-sizing: border-box;
+}

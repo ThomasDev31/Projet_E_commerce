@@ -38,12 +38,14 @@
   width: 80%;
   background-color: red;
   transform: translate(-50%,-50%);
+  z-index: 150;
 }
 
 
 
 .nav_section {
 	color: black;
+	cursor: pointer;
 }
 
 .nav_button {
@@ -83,6 +85,3 @@
 	border-radius: 25px;
 } */
 
-.container_Header {
-	z-index: -1000;
-}

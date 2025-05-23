@@ -1,0 +1,124 @@
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    margin: auto;
+    .container-global {
+        width:60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: aqua;
+        height: 35%;
+        .container-form {
+            background-color: red;
+            width: 70%;
+            padding: 20px;
+            height: 100%;
+            position: relative;
+            h2 {
+                text-align: center;
+            }
+
+            form {
+
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                justify-content: center;
+                align-items: center;
+
+                .container-input {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+
+                    input {
+                        width: 80%;
+                        border: none;
+                        border-radius: 20px;
+                        padding: 10px
+                    }
+
+                }
+
+                button {
+                    width: 50%;
+                    border: none;
+                    border-radius: 20px;
+                    padding: 10px
+                }
+
+            }
+        }
+
+        .container-button {
+            background-color: blue;
+            width:30%;
+            position: relative;
+            height: 100%;
+        }
+    }
+
+}
+
+@keyframes movingL {
+    0%{
+        left:0;
+        opacity: 0;
+        
+
+    }100%{
+       left:30%;
+       opacity:1;
+       
+    }
+}
+@keyframes movingR {
+    0%{
+        right:0;
+
+    }100%{
+       right:70%
+    }
+}
+@keyframes movingLR {
+     0%{
+        right:70%;
+        opacity: 0;
+
+    }100%{
+        right:0;
+        opacity:1;
+    }
+}
+@keyframes movingRR {
+   0%{
+        left:30%;
+        opacity: 0;
+    }100%{
+       left:0%;
+       opacity:1;
+       
+    }
+}
+
+.login .container-global .container-form{
+   
+    animation: movingL 0.8s linear forwards;
+}
+.login .container-global .container-button{
+    
+    animation: movingR 0.8s linear forwards;
+}
+.register .container-global .container-form{
+   
+    animation: movingRR 0.8s linear forwards;
+}
+.register .container-global .container-button{
+    
+    animation: movingLR 0.8s linear forwards;
+}

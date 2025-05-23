@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import "../styles/login.css";
 import axios from "axios";
 
 function Login() {
@@ -29,35 +29,46 @@ function Login() {
     };
 
     return (
-        <div>
-            <h2>Inscription</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Nom d'utilisateur"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Mot de passe"
-                    value={form.password}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <button type="submit">S'enregistrer</button>
-            </form>
+        <div className="container register">
+            <div className="container-global">
+                <div className="container-form">
+                    <h2>Inscription</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="container-input">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Nom d'utilisateur"
+                                value={form.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-            <p>{message}</p>
+                        <div className="container-input">
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Mot de passe"
+                                value={form.password}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-            <Link to="/login">
-                <button>Passer à la connexion</button>
-            </Link>
+                        <button type="submit">S'enregistrer</button>
+                    </form>
+                </div>
+                <div className="container-button">
+                    <p>{message}</p>
+
+                    <Link to="/login">
+                        <button className="siwtch">
+                            Passer à la connexion
+                        </button>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }

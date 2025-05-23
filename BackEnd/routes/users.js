@@ -3,6 +3,9 @@ const db = require('../db/db');
 const express = require("express");
 const bcrypt = require("bcrypt");
 const route = express.Router();
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const secretKey = process.env.SECRET_KEY
 
 
 route.post('/login', async (req, res) => {
@@ -22,7 +25,8 @@ route.post('/login', async (req, res) => {
         try {
             const passVerify = await bcrypt.compare(password, row.password);
             if (passVerify) {
-                res.status(200).json({ message: 'Mot de passe est bon' });
+                const token = jwt.sign({id : row.id, email : row.email}, secretKey, {expiresIn: '3h'})
+                res.status(200).json({ message: 'Mot de passe est bon', token });
             } else {
                 res.status(200).json({ message: 'Mot de passe pas bon' });
             }

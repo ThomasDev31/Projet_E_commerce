@@ -6,7 +6,6 @@ import axios from "axios";
 function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
     const [message, setMessage] = useState("");
-
     const navigate = useNavigate();
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,6 +18,8 @@ function Login() {
         try {
             const res = await axios.post(url, form);
             setMessage(res.data.message);
+
+            localStorage.setItem('token', res.data.token)
             if (res.data.message === "Mot de passe est bon") {
                 navigate("/");
             }

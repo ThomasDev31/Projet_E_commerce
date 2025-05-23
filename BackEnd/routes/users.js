@@ -1,57 +1,69 @@
 
-const sql = require('../db/db');
+const db = require('../db/db');
 const express = require("express");
 const bcrypt = require("bcrypt");
 const route = express.Router();
 
 
 route.post('/login', async (req, res) => {
-    try {
-        const { name, password } = req.body;
+    const { email, password } = req.body;
 
-        const query = 'SELECT * FROM user WHERE name = ?';
+    const query = 'SELECT * FROM users WHERE email = ?';
+    db.get(query, [email], async (err, row) => {
+        if (err) {
+            console.log(err)
+            return res.status(400).json({ message: 'Erreur requête' });
+        }
 
-        const [rows] = await sql.execute(query, [name]);
-        if (rows.length === 0) {
-            res.status(200).json({ message: 'Le nom du user est pas bon' });
-        } else {
-            const hashedPassowrd = rows[0].password;
+        if (!row) {
+            return  res.status(200).json({ message: 'Utilisateur introuvable !' });
+        }
 
-            const passVerify = await bcrypt.compare(password, hashedPassowrd);
+        try {
+            const passVerify = await bcrypt.compare(password, row.password);
             if (passVerify) {
                 res.status(200).json({ message: 'Mot de passe est bon' });
             } else {
                 res.status(200).json({ message: 'Mot de passe pas bon' });
             }
+        } catch (bcryptErr) {
+                console.log(bcryptErr)
+                res.status(500).json({message : 'Erreur de bcrypt'})
         }
-    } catch (error) {
-        console.log(error)
-        res.status(400).json({ message: 'Error' })
-    }
+    })
 })
 
 route.post('/register', async (req, res) => {
-    try {
-        const { name, password } = req.body;
 
-        const query = 'SELECT * FROM user WHERE name = ?'
+        const { email, password } = req.body;
+        const query = 'SELECT * FROM users WHERE email = ?'
 
-        const [rows] = await sql.execute(query, [name])
-        if (rows.length === 0) {
-                const passHash = await bcrypt.hash(password, 10)
-                const insertQuery = 'INSERT INTO user (name, password) VALUES (?,?) '
-                await sql.execute(insertQuery, [name, passHash])
+        db.get(query, [email], async(err, row) => {
+             if (err) {
+                console.log(err)
+                return res.status(400).json({ message: 'Erreur requête' });
+            }
 
-                res.status(200).json({ message: 'Utilisateur ajouté' })
-
-           
-        } else {
-            res.status(200).json({ message: "Le nom d'utilisateur est déjà utilisé ou le mot de passe" })
+        if (row) {
+            return res.status(200).json({ message: 'Utilisateur déjà utilisé ' });
         }
-    } catch (error) {
-        console.log(error)
-        res.status(400).json({ message: 'Error' })
-    }
+        try {
+            const passHash = await bcrypt.hash(password, 10)
+            const insertQuery = 'INSERT INTO users (email, password) VALUES (?,?) '
+            db.run(insertQuery, [email, passHash],  (err) => {
+                if(err){
+                    console.log(err)
+                    res.status(400).json({message : "Erreur à l'ajout de l'utilisateur"})
+                }else{
+                    res.status(200).json({ message: 'Utilisateur ajouté' })
+                }
+            })
+        } catch (bcrypt) {
+            console.log(bcrypt);
+            res.status(500).json({message : "Erreur de bcrypt"})
+        }
+        })
+        
 })
 
 module.exports = route;

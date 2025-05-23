@@ -1,19 +1,13 @@
-const mysql = require('mysql2/promise');
-
-const connection = mysql.createPool({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'node_e_commerce'
-})
-
-connection.getConnection((err)=>{
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const dbPath = path.resolve(__dirname, '../database/database.db');
+const db = new sqlite3.Database(dbPath, (err) => {
     if(err){
-        console.log(err)
+        console.log('Erreur ouverture DB : ', err.message)
     }else{
-        return null
+        console.log('Connecté à SQLite');
     }
 })
 
 
-module.exports = connection;
+module.exports = db;

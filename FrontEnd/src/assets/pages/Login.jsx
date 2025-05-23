@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-    const [form, setForm] = useState({ name: "", password: "" });
+    const [form, setForm] = useState({ email: "", password: "" });
     const [message, setMessage] = useState("");
 
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const url = `http://localhost:5000/user/register`;
+        const url = `http://localhost:5000/user/login`;
 
         try {
             const res = await axios.post(url, form);
@@ -33,10 +33,10 @@ function Login() {
             <h2>Connexion</h2>
             <form onSubmit={handleSubmit}>
                 <input
-                    type="text"
-                    name="name"
+                    type="email"
+                    name="email"
                     placeholder="Nom d'utilisateur"
-                    value={form.name}
+                    value={form.email}
                     onChange={handleChange}
                     required
                 />
